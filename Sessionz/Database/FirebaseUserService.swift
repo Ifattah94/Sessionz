@@ -32,14 +32,15 @@ class UserProfileService {
     
     weak public var delegate: UserProfileDelegate!
     static let manager = UserProfileService()
-    private var usersRef: DatabaseReference!
+    public var usersRef: DatabaseReference!
+    var allUsers = [UserProfile]()
     
     
     //MARK: Adds user to database
     func addUserToFirebaseDatabase(userUID: String, displayName: String,  profileImageURL: String, flags: Int, isBanned: Bool){
         let userNameDatabaseReference = usersRef.child(userUID)
         let user: UserProfile
-        user = UserProfile(userID: userUID, displayName: displayName, team: nil, image: nil, flags: 0, isBanned: false, console: nil, onlineProfile: nil); userNameDatabaseReference.setValue(user.convertToJSON()) { (error, _) in
+        user =  UserProfile.init(withUserID: userUID, displayName: displayName, team: nil, image: profileImageURL, flags: flags, isBanned: false, console: nil, onlineProfile: nil); userNameDatabaseReference.setValue(user.convertToJSON()) { (error, _) in
             if let error = error {
                 print("User not added with error: \(error)")
             } else {
@@ -59,15 +60,19 @@ class UserProfileService {
             }
             var currentUsers: [UserProfile] = []
             for snapshot in snapshots {
-                if let json = snapshot.value {
-                    do{
-                        let jsonData = try JSONSerialization.data(withJSONObject: json, options: [])
-                        let currentUser = try JSONDecoder().decode(UserProfile.self, from: jsonData)
-                        currentUsers.append(currentUser)
-                    }catch{
-                        print("Unable to parse currentUser")
-                    }
-                }
+                
+                let currentUser = UserProfile.init(withSnapshot: (snapshot.value as? NSDictionary)!)
+                currentUsers.append(currentUser)
+                
+//                if let json = snapshot.value {
+//                    do{
+//                        let jsonData = try JSONSerialization.data(withJSONObject: json, options: [])
+//                        let currentUser = try JSONDecoder().decode(UserProfile.self, from: jsonData)
+//                        currentUsers.append(currentUser)
+//                    }catch{
+//                        print("Unable to parse currentUser")
+//                    }
+//                }
             }
             if let index = currentUsers.index(where: { (userProfile) -> Bool in
                 return userProfile.userID == userUID
@@ -77,6 +82,34 @@ class UserProfileService {
             }
         }
     }
+    
+    public func getAllUsers(completion: @escaping (_ users: [UserProfile]) -> Void) {
+        usersRef.observe(.value) { (dataSnapshot) in
+            var users: [UserProfile] = []
+            guard let userSnapshots = dataSnapshot.children.allObjects as? [DataSnapshot] else {
+                return
+            }
+            for userSnapshot in userSnapshots {
+                guard let userObject = userSnapshot.value as? [String:Any] else {return}
+               
+               
+                guard let displayName = userObject["displayName"] as? String,
+                let flags = userObject["flags"] as? Int,
+                let isBanned = userObject["isBanned"] as? Bool,
+                let userID = userObject["userID"] as? String else { print("error getting users");return}
+                
+                let character = userObject["character"] as? String
+                let console = userObject["console"] as? String
+                let image = userObject["image"] as? String
+                 let onlineTag = userObject["onlineTag"] as? String
+                let thisUser = UserProfile.init(withUserID: userID, displayName: displayName, team: character, image: image, flags: flags, isBanned: isBanned, console: console, onlineProfile: onlineTag)
+                users.append(thisUser)
+            }
+            UserProfileService.manager.allUsers = users
+            completion(users)
+        }
+    }
+
     
     /////////////Functions to use in version 2
     

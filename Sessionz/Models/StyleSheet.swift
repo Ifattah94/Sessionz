@@ -32,7 +32,7 @@ enum Stylesheet {
         static let Regular = UIFont(name: "HelveticaNeue-Light", size: 15.0)
         static let TextfieldFont = UIFont(name: "HelveticaNeue-Light", size: 20.0)
         static let Link = UIFont(name: "HelveticaNeue", size: 15.0)
-        static let Bold = UIFont(name: "HelveticaNeue-Medium", size: 15.0)
+        static let Bold = UIFont(name: "HelveticaNeue-Medium", size: 20)
     }
     
     

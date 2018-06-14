@@ -12,5 +12,7 @@ import FirebaseAuth
 protocol UserProfileDelegate: class {
     func didAddInfoToUser(_ userService: UserProfileService)
     func didFailToAddInfoToUser(_ userService: UserProfileService, error: Error)
+    
+    
 }
 

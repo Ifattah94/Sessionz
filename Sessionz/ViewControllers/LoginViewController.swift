@@ -201,7 +201,8 @@ extension LoginViewController: AuthUserDelegate {
     func didSignIn(_ userService: AuthUserService, user: User) {
          userLoginView.passwordTextField.text = nil
         let homeVC = HomeViewController()
-        present(homeVC, animated: true, completion: nil)
+        let navController = UINavigationController(rootViewController: homeVC)
+        present(navController, animated: true, completion: nil)
         
     }
     

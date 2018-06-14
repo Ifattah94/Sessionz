@@ -20,9 +20,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         let loginVC = LoginViewController()
         let logInViewController = UINavigationController(rootViewController: loginVC)
-        let accountInfoVC = AccountInfoViewController()
-        let accNav = AccountInfoNavController()
-        let vcLoad = accNav.storyboardInstance()
+        //let accountInfoVC = AccountInfoViewController()
+        //let accNav = AccountInfoNavController()
+        //let vcLoad = accNav.storyboardInstance()
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.rootViewController = logInViewController
         window?.makeKeyAndVisible()

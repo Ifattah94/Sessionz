@@ -31,6 +31,7 @@
 		81C708CB20CAF40600D47EF7 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C708CA20CAF40600D47EF7 /* LocationService.swift */; };
 		81C708CD20CAFFF000D47EF7 /* UserLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C708CC20CAFFF000D47EF7 /* UserLocation.swift */; };
 		81CACF1520C9B50F007829FB /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CACF1420C9B50F007829FB /* HomeView.swift */; };
+		81CCE11520D98ED4005CF923 /* ImageResizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CCE11420D98ED4005CF923 /* ImageResizer.swift */; };
 		81E1585B20BA27B80017F2F6 /* CharactersTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E1585A20BA27B80017F2F6 /* CharactersTableViewController.swift */; };
 		81E6FE8020AA26B4008875C8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E6FE7F20AA26B4008875C8 /* AppDelegate.swift */; };
 		81E6FE8220AA26B4008875C8 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81E6FE8120AA26B4008875C8 /* LoginViewController.swift */; };
@@ -75,6 +76,7 @@
 		81C708CA20CAF40600D47EF7 /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		81C708CC20CAFFF000D47EF7 /* UserLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserLocation.swift; sourceTree = "<group>"; };
 		81CACF1420C9B50F007829FB /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		81CCE11420D98ED4005CF923 /* ImageResizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageResizer.swift; sourceTree = "<group>"; };
 		81E1585A20BA27B80017F2F6 /* CharactersTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharactersTableViewController.swift; sourceTree = "<group>"; };
 		81E6FE7C20AA26B4008875C8 /* Sessionz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sessionz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81E6FE7F20AA26B4008875C8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 				818B469C20ADEE3E00F04463 /* FirebaseObjects */,
 				81BA5B3020B4B2340035044D /* Alert.swift */,
 				813E19B620BF260B009D1258 /* UIColorExtension.swift */,
+				81CCE11420D98ED4005CF923 /* ImageResizer.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -401,6 +404,7 @@
 				81111C5E20B3720200B5539C /* FirebaseUserService.swift in Sources */,
 				818AEFF220C860CA00764A3F /* ForgotPassView.swift in Sources */,
 				81111C5720B36CEB00B5539C /* AuthUserDelegate.swift in Sources */,
+				81CCE11520D98ED4005CF923 /* ImageResizer.swift in Sources */,
 				81111C5920B36D2000B5539C /* AuthUserService.swift in Sources */,
 				813E19B320BF2098009D1258 /* ChooseImageViewController.swift in Sources */,
 				81CACF1520C9B50F007829FB /* HomeView.swift in Sources */,

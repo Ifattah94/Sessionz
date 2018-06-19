@@ -31,6 +31,12 @@ class UserLocation: NSObject, Codable {
         self.longitude = location.coordinate.longitude
         
     }
+    init (locationID: String, userID: String, longitude: Double, latitude: Double) {
+        self.locationID = locationID
+        self.userID = userID
+        self.longitude = longitude
+        self.latitude = latitude
+    }
 }
 
 extension UserLocation: MKAnnotation {

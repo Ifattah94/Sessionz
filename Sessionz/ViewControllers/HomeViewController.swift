@@ -9,8 +9,12 @@
 import UIKit
 import MapKit
 import CoreLocation
+import FirebaseAuth
 
 class HomeViewController: UIViewController {
+    var currentUserID = AuthUserService.manager.getCurrentUser()?.uid
+    var currentUserLocation: UserLocation?
+    
 
     let homeView = HomeView()
     private var annotations = [MKAnnotation]()
@@ -25,14 +29,33 @@ class HomeViewController: UIViewController {
     }
     
     
+    var userLocations = [UserLocation]() {
+        didSet {
+            for location in userLocations {
+                  let annotation = MKPointAnnotation()
+                annotation.coordinate = CLLocationCoordinate2DMake(location.latitude, location.longitude)
+                annotations.append(annotation)
+            }
+            DispatchQueue.main.async {
+                self.homeView.mapView.addAnnotations(self.annotations)
+                self.homeView.mapView.showAnnotations(self.annotations, animated: true)
+            }
+        }
+    }
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setCurrentUserLocation()
+        setUserLocations()
         configureHomeView()
         setupNavigationBar()
         askUserForPermission()
         loadUsers()
         setupDelegates()
+        setRegionFromUser(with: self.currentUserLocation)
+        
        
        
     }
@@ -40,6 +63,18 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+    }
+    func setCurrentUserLocation() {
+        if let currentUserID = currentUserID {
+            UserProfileService.manager.getUserLocation(fromUserUID: currentUserID) { (userLocationOnline) in
+                self.currentUserLocation = userLocationOnline
+            }
+        }
+    }
+    private func setUserLocations() {
+        UserProfileService.manager.getAllUserLocations { (onlineLocations) in
+            self.userLocations = onlineLocations
+        }
     }
     
     
@@ -64,6 +99,7 @@ class HomeViewController: UIViewController {
     
     private func setupDelegates() {
         locationService.locationServiceDelegate = self
+        homeView.mapView.delegate = self
         homeView.tableView.dataSource = self
         homeView.tableView.delegate = self 
         
@@ -74,6 +110,18 @@ class HomeViewController: UIViewController {
         UserProfileService.manager.getAllUsers { (allUsers) in
             self.usersOnMap = allUsers
             self.homeView.tableView.reloadData()
+        }
+    }
+    
+    func setRegionFromUser(with userLocation: UserLocation?) {
+        if let userLocation = userLocation {
+            
+            let latitude = CLLocationDegrees(userLocation.latitude)
+            let longitude = CLLocationDegrees(userLocation.longitude)
+            let regionArea = 0.06
+            let center = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+            let region = MKCoordinateRegion(center: center, span: MKCoordinateSpan(latitudeDelta: regionArea, longitudeDelta: regionArea))
+            homeView.mapView.setRegion(region, animated: true)
         }
     }
     
@@ -113,7 +161,23 @@ extension HomeViewController: LocationServiceDelegate {
         
     }
     
-   
     
-    
+}
+extension HomeViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+       
+        var userAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: "UserAnnotationView")
+        if userAnnotationView == nil {
+            userAnnotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "UserAnnotationView")
+            userAnnotationView?.canShowCallout = true
+             let index = annotations.index{$0 === annotation}
+            if let annotationIndex = index {
+                userAnnotationView?.image = #imageLiteral(resourceName: "cmPunk").reDrawImage(using: CGSize(width: 50, height: 50))
+                userAnnotationView?.contentMode = .scaleAspectFit
+            }
+        } else {
+            userAnnotationView?.annotation = annotation
+        }
+        return userAnnotationView
+    }
 }

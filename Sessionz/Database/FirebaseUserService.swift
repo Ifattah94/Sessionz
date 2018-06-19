@@ -34,7 +34,7 @@ class UserProfileService {
     static let manager = UserProfileService()
     public var usersRef: DatabaseReference!
     var allUsers = [UserProfile]()
-    
+    var allLocations = [UserLocation]()
     
     //MARK: Adds user to database
     func addUserToFirebaseDatabase(userUID: String, displayName: String,  profileImageURL: String, flags: Int, isBanned: Bool){
@@ -109,6 +109,48 @@ class UserProfileService {
             completion(users)
         }
     }
+    
+    func getAllUserLocations(completion: @escaping (_ locations: [UserLocation]) -> Void) {
+        usersRef.observe(.value) { (dataSnapshot) in
+            var locations: [UserLocation] = []
+            guard let userSnapshots = dataSnapshot.children.allObjects as? [DataSnapshot] else {return}
+            for userSnapshot in userSnapshots {
+                guard let userObject = userSnapshot.value as? [String:Any] else {return}
+                guard let locationDict = userObject["location"] as? [String:Any] else {return}
+                guard let userID = locationDict["userID"] as? String,
+                let longitude = locationDict["longitude"] as? Double,
+                let latitude = locationDict["latitude"] as? Double else {return}
+                let thisLocation = UserLocation(locationID: "locationID", userID: userID, longitude: longitude, latitude: latitude)
+                locations.append(thisLocation)
+                UserProfileService.manager.allLocations = locations
+                completion(locations)
+            }
+            
+        }
+    }
+    
+    func getUserLocation(fromUserUID userUID: String, completion: @escaping (_ location: UserLocation?) -> Void) {
+         var location: UserLocation?
+        usersRef.child(userUID)
+        usersRef.observeSingleEvent(of: .value) { (dataSnapshot) in
+            guard let snapshots = dataSnapshot.children.allObjects as? [DataSnapshot] else {
+                print("couldn't get user snapshots")
+                return
+            }
+           
+            for userSnapshot in snapshots {
+                 guard let userObject = userSnapshot.value as? [String:Any] else {return}
+                guard let locationDict = userObject["location"] as? [String:Any] else {return}
+                guard let locationID = locationDict["location"] as? String,
+                    let userID = locationDict["userID"] as? String,
+                    let longitude = locationDict["longitude"] as? Double,
+                    let latitude = locationDict["latitude"] as? Double else {return}
+                let thisLocation = UserLocation(locationID: locationID, userID: userID, longitude: longitude, latitude: latitude)
+                location = thisLocation
+                completion(location)
+            }
+        }
+    }
 
     
     /////////////Functions to use in version 2
@@ -136,6 +178,10 @@ class UserProfileService {
         child.child("character").setValue(character)
         child.child("onlineTag").setValue(onlieTag)
        self.delegate.didAddInfoToUser(self)
+        
+    }
+    
+    public func getAllUserLocations(completion: @escaping ([UserLocation]) -> Void, errorhandler: @escaping(Error) -> Void) {
         
     }
     

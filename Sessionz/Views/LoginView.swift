@@ -19,7 +19,6 @@ class LoginView: UIView {
     //password
     lazy var passwordTextField: UITextField = {
         let passTF = UITextField()
-        passTF.text = "qwerty"
         Stylesheet.Objects.Textfields.LoginPassword.style(textfield: passTF)
         return passTF
     }()

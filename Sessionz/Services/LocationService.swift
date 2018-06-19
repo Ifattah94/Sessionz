@@ -65,6 +65,13 @@ class LocationService: NSObject {
         }
     }
     
+    public func addUserLocationsFromFirebaseToMap() {
+        UserProfileService.manager.getAllUserLocations { (locations) in
+            self.locationServiceDelegate.userLocationsUpdatedFromFirebase(locations)
+            
+        }
+    }
+    
     func lookUpAddress(location: CLLocation, completionHandler: @escaping (CLPlacemark?) -> Void) {
         // Use the last reported location.
         let geocoder = CLGeocoder()

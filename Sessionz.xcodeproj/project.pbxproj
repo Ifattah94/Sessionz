@@ -15,6 +15,8 @@
 		81111C5B20B36F1500B5539C /* UserDefaultHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81111C5A20B36F1500B5539C /* UserDefaultHelper.swift */; };
 		81111C5E20B3720200B5539C /* FirebaseUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81111C5D20B3720200B5539C /* FirebaseUserService.swift */; };
 		811532F620AB80080074AB9C /* DBZCharacter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811532F520AB80080074AB9C /* DBZCharacter.swift */; };
+		811D91F020DACC9300C611A8 /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811D91EF20DACC9300C611A8 /* ProfileView.swift */; };
+		811D91F220DAD6F900C611A8 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811D91F120DAD6F900C611A8 /* ProfileViewController.swift */; };
 		812FB2D520B5FD64004DEF45 /* Flag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812FB2D420B5FD64004DEF45 /* Flag.swift */; };
 		812FB2D920B60D89004DEF45 /* AccountInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812FB2D820B60D89004DEF45 /* AccountInfoViewController.swift */; };
 		813E19B320BF2098009D1258 /* ChooseImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813E19B220BF2098009D1258 /* ChooseImageViewController.swift */; };
@@ -60,6 +62,8 @@
 		81111C5A20B36F1500B5539C /* UserDefaultHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultHelper.swift; sourceTree = "<group>"; };
 		81111C5D20B3720200B5539C /* FirebaseUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseUserService.swift; sourceTree = "<group>"; };
 		811532F520AB80080074AB9C /* DBZCharacter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBZCharacter.swift; sourceTree = "<group>"; };
+		811D91EF20DACC9300C611A8 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		811D91F120DAD6F900C611A8 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		812FB2D420B5FD64004DEF45 /* Flag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flag.swift; sourceTree = "<group>"; };
 		812FB2D820B60D89004DEF45 /* AccountInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInfoViewController.swift; sourceTree = "<group>"; };
 		813E19B220BF2098009D1258 /* ChooseImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseImageViewController.swift; sourceTree = "<group>"; };
@@ -157,6 +161,7 @@
 				818AEFF120C860CA00764A3F /* ForgotPassView.swift */,
 				81CACF1420C9B50F007829FB /* HomeView.swift */,
 				81FE327320D0517A00BAB256 /* PlayerCell.swift */,
+				811D91EF20DACC9300C611A8 /* ProfileView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -252,6 +257,7 @@
 				81E1585A20BA27B80017F2F6 /* CharactersTableViewController.swift */,
 				813E19B220BF2098009D1258 /* ChooseImageViewController.swift */,
 				81EC294A20C5B04E00A642B7 /* HomeViewController.swift */,
+				811D91F120DAD6F900C611A8 /* ProfileViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -394,6 +400,7 @@
 				812FB2D920B60D89004DEF45 /* AccountInfoViewController.swift in Sources */,
 				81F558BD20C0576F00DF35C2 /* FirebaseStorageService.swift in Sources */,
 				81111C5B20B36F1500B5539C /* UserDefaultHelper.swift in Sources */,
+				811D91F020DACC9300C611A8 /* ProfileView.swift in Sources */,
 				81C708CD20CAFFF000D47EF7 /* UserLocation.swift in Sources */,
 				81EFC81520B74EF7004C3C76 /* AccountInfoNavController.swift in Sources */,
 				81E6FE9420AA3880008875C8 /* NetworkHelper.swift in Sources */,
@@ -415,6 +422,7 @@
 				81EC294B20C5B04E00A642B7 /* HomeViewController.swift in Sources */,
 				81F304FE20C07B4200DC470C /* UserProfileDelegate.swift in Sources */,
 				813E19B720BF260B009D1258 /* UIColorExtension.swift in Sources */,
+				811D91F220DAD6F900C611A8 /* ProfileViewController.swift in Sources */,
 				81E6FE8020AA26B4008875C8 /* AppDelegate.swift in Sources */,
 				81E6FE9A20AB20CD008875C8 /* ImageHelper.swift in Sources */,
 				81C708CB20CAF40600D47EF7 /* LocationService.swift in Sources */,

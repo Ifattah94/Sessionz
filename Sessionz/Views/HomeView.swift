@@ -8,9 +8,10 @@
 
 import UIKit
 import MapKit
+import FirebaseAuth
 
 class HomeView: UIView {
-
+    let currentUserUID = AuthUserService.manager.getCurrentUser()!.uid
     lazy var mapView: MKMapView = {
         let map = MKMapView()
         map.showsUserLocation = true

@@ -34,6 +34,9 @@ class HomeViewController: UIViewController {
             for location in userLocations {
                   let annotation = MKPointAnnotation()
                 annotation.coordinate = CLLocationCoordinate2DMake(location.latitude, location.longitude)
+                UserProfileService.manager.getUser(fromUserUID: location.userID) { (userOnMap) in
+                    annotation.title = userOnMap.displayName
+                }
                 annotations.append(annotation)
             }
             DispatchQueue.main.async {
@@ -95,6 +98,12 @@ class HomeViewController: UIViewController {
         navigationItem.title = "Find Players"
         navigationController?.navigationBar.barTintColor = Stylesheet.Colors.customPurple
         navigationController?.navigationBar.isTranslucent = false
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "icons8-settings-filled-30"), style: .plain, target: self, action: #selector(showProfileVC))
+    }
+    
+    @objc func showProfileVC() {
+        let profileVC = ProfileViewController()
+        self.navigationController?.pushViewController(profileVC, animated: true)
     }
     
     private func setupDelegates() {
@@ -172,7 +181,7 @@ extension HomeViewController: MKMapViewDelegate {
             userAnnotationView?.canShowCallout = true
              let index = annotations.index{$0 === annotation}
             if let annotationIndex = index {
-                userAnnotationView?.image = #imageLiteral(resourceName: "cmPunk").reDrawImage(using: CGSize(width: 50, height: 50))
+                userAnnotationView?.image = #imageLiteral(resourceName: "dragonball").reDrawImage(using: CGSize(width: 35, height: 35))
                 userAnnotationView?.contentMode = .scaleAspectFit
             }
         } else {

@@ -128,6 +128,7 @@ class UserProfileService {
             
         }
     }
+     
     
     func getUserLocation(fromUserUID userUID: String, completion: @escaping (_ location: UserLocation?) -> Void) {
          var location: UserLocation?
